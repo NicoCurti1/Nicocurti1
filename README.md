@@ -1,4 +1,4 @@
-### Hi there 👋
+### Hi there, I'm Nico and I want to welcome you to my profile 😎👨‍💻👱‍♂️
 
 <!--
 **NicoCurti1/Nicocurti1** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
