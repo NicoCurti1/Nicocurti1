@@ -31,3 +31,4 @@ python3 -m http.server
 
 Si deseas utilizar tus propias credenciales de Google modifica las constantes `SPREADSHEET_ID` y `API_KEY` en `index.html`.
 Las cabeceras de fila y columna permanecen fijas al hacer scroll para que los identificadores estén siempre visibles.
+El plano se refresca automáticamente cada 5 minutos para obtener los últimos datos del Google Sheet.

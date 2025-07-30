@@ -95,6 +95,10 @@
 
       React.useEffect(() => {
         fetchTable().then(setData);
+        const id = setInterval(() => {
+          fetchTable().then(setData);
+        }, 5 * 60 * 1000); // refresh every 5 minutes
+        return () => clearInterval(id);
       }, []);
 
       return (
