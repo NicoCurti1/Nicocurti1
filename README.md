@@ -30,3 +30,4 @@ python3 -m http.server
 2. Abre `http://localhost:8000/index.html` en tu navegador.
 
 Si deseas utilizar tus propias credenciales de Google modifica las constantes `SPREADSHEET_ID` y `API_KEY` en `index.html`.
+Las cabeceras de fila y columna permanecen fijas al hacer scroll para que los identificadores estén siempre visibles.

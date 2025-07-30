@@ -9,6 +9,10 @@
       font-family: Arial, sans-serif;
       padding: 1rem;
     }
+    #container {
+      overflow: auto;
+      margin-bottom: 50px;
+    }
     #grid {
       display: grid;
       grid-gap: 1px;
@@ -18,6 +22,33 @@
       height: 20px;
       border: 1px solid #ccc;
       box-sizing: border-box;
+    }
+    .header {
+      width: 20px;
+      height: 20px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      background: #f7f7f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      position: sticky;
+      z-index: 2;
+    }
+    .top {
+      top: 0;
+      z-index: 3;
+    }
+    .left {
+      left: 0;
+      z-index: 3;
+    }
+    .corner {
+      top: 0;
+      left: 0;
+      z-index: 4;
+      background: #fff;
     }
   </style>
 </head>
@@ -56,22 +87,37 @@
       const [data, setData] = React.useState({});
       const letters = Array.from({ length: 16 }, (_, i) => String.fromCharCode(65 + i));
       const numbers = Array.from({ length: 493 }, (_, i) => 493 - i);
+      const colorMap = {
+        rojo: '#ff0000',
+        naranja: 'orange',
+        amarillo: 'yellow',
+      };
 
       React.useEffect(() => {
         fetchTable().then(setData);
       }, []);
 
       return (
-        <div id="grid" style={{gridTemplateColumns: `repeat(${numbers.length}, 20px)`}}>
-          {letters.map(letter =>
-            numbers.map(num => {
-              const id = `${letter}${num}`;
-              const info = data[id];
-              const style = info ? { backgroundColor: info.color } : null;
-              const title = info ? `${id} - ${info.criticidad}` : id;
-              return <div key={id} className="cell" style={style} title={title}></div>;
-            })
-          )}
+        <div id="container">
+          <div id="grid" style={{gridTemplateColumns: `repeat(${numbers.length + 1}, 20px)`}}>
+            <div className="header corner"></div>
+            {numbers.map(num => (
+              <div key={`h-${num}`} className="header top">{num}</div>
+            ))}
+            {letters.map(letter => (
+              <React.Fragment key={letter}>
+                <div className="header left">{letter}</div>
+                {numbers.map(num => {
+                  const id = `${letter}${num}`;
+                  const info = data[id];
+                  const color = info ? (colorMap[info.color.toLowerCase()] || info.color) : '';
+                  const style = info ? { backgroundColor: color } : null;
+                  const title = info ? `${id} - ${info.criticidad}` : id;
+                  return <div key={id} className="cell" style={style} title={title}></div>;
+                })}
+              </React.Fragment>
+            ))}
+          </div>
         </div>
       );
     }
